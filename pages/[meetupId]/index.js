@@ -33,7 +33,7 @@ export async function getStaticPaths() {
   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
   client.close();
   return {
-    fallback: false, // false => means paths contains all supported meetupIds if the user entering anything not supported in paths will return 404 [not found] for example "m3"
+    fallback: "blocking", // false => means paths contains all supported meetupIds if the user entering anything not supported in paths will return 404 [not found] for example "m3"
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
